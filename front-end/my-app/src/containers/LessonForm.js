@@ -30,4 +30,4 @@ import React,  { Component } from 'react'
         )
     }
 }
-export default LessonForm;
+export default LessonForm
