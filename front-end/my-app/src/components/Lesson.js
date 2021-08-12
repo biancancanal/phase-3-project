@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 
- class Lesson extends Component {
-    render() {
-        return (
-            <div>
-                <h4>Info, Time, Etc </h4>
-            </div>
-        )
-    }
+const Lesson = (props) => {
+    return (
+    <div>
+        <h4> {props.teacher.lesson.name} </h4>
+    </div>
+    )
 }
-export default Lesson
+
+export default Lesson;

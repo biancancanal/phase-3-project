@@ -19,8 +19,23 @@ export const Teacher = (props) => {
     }, [props.match.params.id])
 
     const addLesson = (lesson) => {
-        console.log(lesson)
-    }
+        fetch(`http://localhost:9292/teachers/${teacher.id}/lessons`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(lesson)
+         })
+         .then(r => r.json())
+         .then(data => {
+             console.log(data)
+            setTeacher ({
+                ...teacher,
+                lessons: [...teacher.lessons, data ]
+            })
+          })
+          setLessonFormFlag(false)
+        }
 
     const lessons = teacher.lessons.map( x => <Lesson key={x.id} lesson={x}/>)
 

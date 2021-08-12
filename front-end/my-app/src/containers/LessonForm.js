@@ -1,8 +1,9 @@
 import React,  { Component } from 'react'
+import Teacher from './Teacher'
 
  class LessonForm extends Component {
     state = {
-        lesson: ''
+        name: ''
     }
 
     handleChange = (e) => {
@@ -15,6 +16,7 @@ import React,  { Component } from 'react'
         e.preventDefault()
         this.props.addALesson(this.state) 
     }
+    
 
     render() {
         return (
