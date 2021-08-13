@@ -1,5 +1,6 @@
 import React,  { Component } from 'react'
 import Teacher from './Teacher'
+import Lesson from '../components/Lesson'
 
  class LessonForm extends Component {
     state = {

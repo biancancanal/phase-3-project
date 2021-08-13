@@ -37,7 +37,7 @@ export const Teacher = (props) => {
           setLessonFormFlag(false)
         }
 
-    const lessons = teacher.lessons.map( x => <Lesson key={x.id} lesson={x}/>)
+    const lessons = teacher.lessons.map( l => <Lesson key={l.id} lesson={l}/>)
 
     return (
         <div>

@@ -4,6 +4,8 @@ import Home from './components/Home'
 import Teacher from './containers/Teacher'
 import Teachers from './containers/Teachers'
 import Navigation from './components/Navigation'
+// import Lesson from './components/Lesson';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/teachers" component={Teachers} />
           <Route exact path="/teachers/:id" component={Teacher} />
+          {/* <Route exact path="/teachers/:id/lesson" component={Lesson} /> */}
         </Switch>
       </Router>
     </div>

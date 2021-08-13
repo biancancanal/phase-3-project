@@ -14,7 +14,7 @@ class Application
         input = JSON.parse(req.body.read)
         teacher_id = req.path.split('/teachers/').last.split('/lessons').last
         teacher = Teacher.find_by(id: teacher_id)
-        lessons = teacher.lesson.create(name: input["name"]) #understand methods / reasoning for create 
+        lesson = teacher.lessons.create(name: input["name"]) #understand methods / reasoning for create 
         return [200, { 'Content-Type' => 'application/json' }, [ lesson.to_json ]] #return lesson
       end
     elsif req.path.match(/teachers/) 
