@@ -6,6 +6,13 @@ class LessonEdit extends Component {
         name: ''
     }
     
+    componenetDidMount() {
+        this.state({
+            id: this.props.lesson.id,
+            name: this.props.lesson.name
+        })
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -14,14 +21,15 @@ class LessonEdit extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.addADog(this.state)
+        this.props.editLesson(this.state)
+        this.props.toggleForm(e)
     }
 
     render() {
         return (
             <div>
-                <form onSunmit={this.handleSubmit}>
-                    <label>Class: </label> <br/>
+                <form onSubmit={this.handleSubmit}>
+                    <label>New Class </label> <br/>
                     <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
                     <br/>
                     <input type="submit"/>

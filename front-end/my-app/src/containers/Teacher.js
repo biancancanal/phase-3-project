@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Lesson from '../components/Lesson'
 import LessonForm from './LessonForm'
 
+
 export const Teacher = (props) => {
     const [teacher, setTeacher] = useState({
         lessons: []
@@ -37,7 +38,41 @@ export const Teacher = (props) => {
           setLessonFormFlag(false)
         }
 
-    const lessons = teacher.lessons.map( l => <Lesson key={l.id} lesson={l}/>)
+    const deleteLesson = (id) => {
+        fetch(`http://localhost:9292/lessons/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+         })
+         .then(() => {
+             const newLessons = teacher.lessons.filter(l => l.id !==id)
+
+             setTeacher({
+                 ...teacher,
+                 lessons: newLessons
+             })
+        })
+    }
+
+    const editLesson = (id) => {
+        fetch(`http://localhost:9292/lessons/${id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(id)
+         })
+         .then(()=> {
+            const newLessons = teacher.lessons.filter(l => l.id !==id) 
+            setTeacher({
+                 ...teacher,
+                 lessons: newLessons
+             })
+         })
+    }
+
+    const lessons = teacher.lessons.map( l => <Lesson key={l.id} lesson={l} editLesson={editLesson} deleteLesson={deleteLesson}/>)
 
     return (
         <div>

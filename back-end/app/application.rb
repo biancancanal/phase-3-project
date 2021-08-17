@@ -16,6 +16,16 @@ class Application
         teacher = Teacher.find_by(id: teacher_id)
         lesson = teacher.lessons.create(name: input["name"]) #understand methods / reasoning for create 
         return [200, { 'Content-Type' => 'application/json' }, [ lesson.to_json ]] #return lesson
+      elsif req.env["REQUEST_METHOD"] == "DELETE"
+        # teacher_id = req.path.split('/teachers/').last.split('/lessons/').first
+        # teacher = Teacher.find_by(id: teacher_id)
+        puts "Hello WOrld"
+        lesson_id = req.path.split('/teachers/').last.split('/lessons/').last
+        Lesson.find_by(id: lesson_id).delete 
+        return [200, { 'Content-Type' => 'application/json' }, [ {:message => "Task deleted!"}.to_json ]]
+      elsif req.env["REQUEST_METHOD"] == "PATCH"
+        lesson = teacher.lessons.find_by(id: lesson_id)
+        lesson.update(input)
       end
     elsif req.path.match(/teachers/) 
       if req.env["REQUEST_METHOD"] == "POST"
