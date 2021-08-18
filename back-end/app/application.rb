@@ -19,19 +19,26 @@ class Application
       elsif req.env["REQUEST_METHOD"] == "DELETE"
         # teacher_id = req.path.split('/teachers/').last.split('/lessons/').first
         # teacher = Teacher.find_by(id: teacher_id)
-        puts "Hello WOrld"
         lesson_id = req.path.split('/teachers/').last.split('/lessons/').last
         Lesson.find_by(id: lesson_id).delete 
         return [200, { 'Content-Type' => 'application/json' }, [ {:message => "Task deleted!"}.to_json ]]
       elsif req.env["REQUEST_METHOD"] == "PATCH"
-        lesson = teacher.lessons.find_by(id: lesson_id)
-        lesson.update(input)
+
+        input = JSON.parse(req.body.read)
+        lesson_id = req.path.split('/teachers/').last.split('/lessons/').last
+        lesson = Lesson.find_by(id: lesson_id)
+        puts "Hello World"
+        return [200, { 'Content-Type' => 'application/json' }, [ lesson.to_json ]]
       end
     elsif req.path.match(/teachers/) 
       if req.env["REQUEST_METHOD"] == "POST"
         input = JSON.parse(req.body.read) #grabs body from config object, sent as payload 
         teacher = Teacher.create(name: input["name"]) #add to Active record, add to database
         return [200, { 'Content-Type' => 'application/json' }, [ Teacher.to_json ]]
+      # elsif req.env["REQUEST_METHOD"] == "DELETE"
+      #   teacher_id = req.path.split('/teachers/').last.split('/lessons/').first
+      #   teacher = Teacher.find_by(id: teacher_id).delete
+      #   return [200, { 'Content-Type' => 'application/json' }, [ {:message => "task deleted!"}to_json ]]
       else
         if req.path.split("/teachers").length == 0
           return [200, { 'Content-Type' => 'application/json' }, [ Teacher.all.to_json ]]

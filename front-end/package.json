@@ -1,5 +1,11 @@
 {
   "dependencies": {
     "react-router-dom": "^5.2.0"
-  }
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+     "eject": "react-scripts eject"
+   }
 }

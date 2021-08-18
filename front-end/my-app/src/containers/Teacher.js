@@ -46,31 +46,35 @@ export const Teacher = (props) => {
             }, 
          })
          .then(() => {
-             const newLessons = teacher.lessons.filter(l => l.id !==id)
-
+             
              setTeacher({
                  ...teacher,
-                 lessons: newLessons
+                 lessons: teacher.lessons.filter(l => l.id !==id)
+
              })
         })
     }
 
-    const editLesson = (id) => {
-        fetch(`http://localhost:9292/lessons/${id}`, {
+    const editLesson = (lesson) => {
+        fetch(`http://localhost:9292/lessons/${lesson.id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(id)
+            body: JSON.stringify(lesson)
          })
+
          .then(()=> {
-            const newLessons = teacher.lessons.filter(l => l.id !==id) 
+            const newLessons = teacher.lessons.filter(l => l.id !==lesson.id) 
+            console.log(lesson)
             setTeacher({
                  ...teacher,
-                 lessons: newLessons
-             })
+                 lessons: newLessons 
          })
-    }
+         console.log(lesson)
+        // console.log(id)
+    })
+}
 
     const lessons = teacher.lessons.map( l => <Lesson key={l.id} lesson={l} editLesson={editLesson} deleteLesson={deleteLesson}/>)
 

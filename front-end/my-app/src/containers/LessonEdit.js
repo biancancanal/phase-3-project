@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class LessonEdit extends Component {
     state = {
-        id: null,
+        id: this.props.lesson.id,
         name: ''
     }
     
@@ -12,6 +12,7 @@ class LessonEdit extends Component {
             name: this.props.lesson.name
         })
     }
+    
 
     handleChange = (e) => {
         this.setState({
