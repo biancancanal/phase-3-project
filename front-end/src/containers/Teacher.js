@@ -65,11 +65,11 @@ export const Teacher = (props) => {
          })
 
          .then(()=> {
-            const newLessons = teacher.lessons.filter(l => l.id !==lesson.id) 
+            //const newLessons = teacher.lessons.filter(l => l.id lesson.id) 
             console.log(lesson)
             setTeacher({
                  ...teacher,
-                 lessons: newLessons 
+                 [lesson.id]: lesson //update lesson 
          })
          console.log(lesson)
     })

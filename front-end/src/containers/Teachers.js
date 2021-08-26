@@ -1,3 +1,4 @@
+import { ID } from 'postcss-selector-parser'
 import React, {useState, useEffect} from 'react'
 import TeacherLink from '../components/TeacherLink'
 import TeacherForm from './TeacherForm'
@@ -38,7 +39,20 @@ export const Teachers = () => {
           setTeacherFormFlag(false)
         }
 
-    const teachersList = teachers.map(t => <TeacherLink key={t.id} teacher={t}/>)
+
+    const deleteTeacher = (id) => {
+        fetch(`http://localhost:9292/teachers/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+         })
+         .then(() => {
+             setTeachers(teachers.filter(t => t.id !==id))
+        })
+    }
+
+    const teachersList = teachers.map(t => <TeacherLink key={t.id} teacher={t} deleteTeacher={deleteTeacher}/>)
 
     return (
         <div>
