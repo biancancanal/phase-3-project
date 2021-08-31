@@ -80,7 +80,6 @@ export const Teacher = (props) => {
     return (
         <div>
             <h1>{teacher.name}</h1>
-            <h2> Biography </h2>
             <h2> Lessons </h2>
             {lessons}
             {lessonFormFlag ? <LessonForm addALesson={addLesson} teacher={teacher}/> : <button onClick={()=> setLessonFormFlag(true)}>New Lesson</button>}
