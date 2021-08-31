@@ -34,7 +34,7 @@ class Application
       if req.env["REQUEST_METHOD"] == "POST"
         input = JSON.parse(req.body.read) #grabs body from config object, sent as payload 
         teacher = Teacher.create(name: input["name"]) #add to Active record, add to database
-        return [200, { 'Content-Type' => 'application/json' }, [ Teacher.to_json ]]
+        return [200, { 'Content-Type' => 'application/json' }, [ teacher.to_json ]]
       elsif req.env["REQUEST_METHOD"] == "DELETE"
         teacher_id = req.path.split('/teachers/').last.split('/lessons/').first
         Teacher.find_by(id: teacher_id).delete

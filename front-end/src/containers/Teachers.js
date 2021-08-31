@@ -24,18 +24,22 @@ export const Teachers = () => {
 
     const addTeacher = (teacher) => {
         //inform backend, change state, toggle form
-        fetch('http://localhost:9292/teachers', {
+        fetch(`http://localhost:9292/teachers/`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(teacher)
          })
-         .then(r => r.json())
+         .then(r => r.json()) //not reaching these next four lines 
          .then(data => {
-             console.log(data)
-            setTeachers(...teachers, data)
+            console.log(teacher)
+            console.log(data)
+            console.log(teachers)
+            console.log(setTeachers)
+            // setTeachers(...teachers, data)
           })
+          console.log(teacher)
           setTeacherFormFlag(false)
         }
 
