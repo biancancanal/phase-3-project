@@ -31,13 +31,13 @@ export const Teachers = () => {
             },
             body: JSON.stringify(teacher)
          })
-         .then(r => r.json()) //not reaching these next four lines 
+         .then(r => r.json()) 
          .then(data => {
             console.log(teacher)
             console.log(data)
             console.log(teachers)
             console.log(setTeachers)
-            // setTeachers(...teachers, data)
+            setTeachers([...teachers, data])
           })
           console.log(teacher)
           setTeacherFormFlag(false)

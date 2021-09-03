@@ -26,7 +26,6 @@ class Application
         input = JSON.parse(req.body.read)
         lesson_id = req.path.split('/teachers/').last.split('/lessons/').last
         lesson = Lesson.find_by(id: lesson_id)
-        puts "Hello World"
         lesson.update(input)
         return [200, { 'Content-Type' => 'application/json' }, [ lesson.to_json ]]
       end

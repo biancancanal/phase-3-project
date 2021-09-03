@@ -63,16 +63,28 @@ export const Teacher = (props) => {
             }, 
             body: JSON.stringify(lesson)
          })
-
-         .then(()=> {
+         .then( r => r.json())
+         .then((lesson)=> {
+             const newLessons = teacher.lessons.map(l => {
+                 if (l.id === lesson.id) {
+                     return lesson
+                }
+                else {
+                    return l
+                }})
+                setTeacher({
+                    ...teacher,
+                    lessons: newLessons
+                })
+             })
             //const newLessons = teacher.lessons.filter(l => l.id lesson.id) 
-            console.log(lesson)
-            setTeacher({
-                 ...teacher,
-                 [lesson.id]: lesson //update lesson 
-         })
-         console.log(lesson)
-    })
+            // console.log(lesson)
+            // setTeacher({
+            //      ...teacher,
+            //      [lesson.id]: lesson //update lesson 
+        //  })
+    //      console.log(lesson)
+    // })
 }
 
     const lessons = teacher.lessons.map( l => <Lesson key={l.id} lesson={l} editLesson={editLesson} deleteLesson={deleteLesson}/>)
